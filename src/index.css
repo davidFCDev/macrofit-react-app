@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+	overflow-x: hidden;
+}
+
+.nav {
+	background-image: url('https://images.unsplash.com/photo-1617957796155-72d8717ac882?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8Zm9uZG9zJTIwdmVyZGVzfGVufDB8fDB8fA%3D%3D&w=1000&q=80');
+	background-repeat: no-repeat;
+	background-size: cover;
+	width: 100%;
+}
+
+.user-btn {
+	background: linear-gradient(45deg, #0a9c0a 0%, #92c692 100%);
+}
+
+.user-btn:hover {
+	background: linear-gradient(45deg, #0a9c0a 0%, #0a9c0a 100%);
+}
+
+.cssbuttons-io-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 1em 1.4em;
+	color: white;
+	background: linear-gradient(45deg, #0a9c0a 0%, #92c692 100%);
+	border: none;
+	border-radius: 1em;
+}
+
+.cssbuttons-io-button:active {
+	box-shadow: 0 0.3em 1em -0.5em #14a73e98;
+}
+
+.dash-title {
+	background: linear-gradient(to right, #92c692, #0a9c0a);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+	color: transparent;
+}
