@@ -35,7 +35,7 @@ const Dashboard = () => {
 						<div className=' flex flex-col gap-1'>
 							<h2 className='text-lg font-semibold uppercase'>Search</h2>
 							<hr className='border w-10 border-neutral-400' />
-							<p className='text-sm italic'>Use the food searcher.</p>
+							<p className='text-sm italic'>Check the values of an ingredient.</p>
 						</div>
 						<button className='cssbuttons-io-button'>
 							<GiFruitBowl className='text-2xl' />
@@ -52,7 +52,7 @@ const Dashboard = () => {
 							<h2 className='text-lg font-semibold uppercase'>Menu</h2>
 							<hr className='border w-10 border-neutral-400' />
 							<p className='text-sm italic'>
-								Add your menu and get your macros.
+								Set a menu and get all your macros.
 							</p>
 						</div>
 						<button className='cssbuttons-io-button'>

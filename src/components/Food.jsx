@@ -87,12 +87,6 @@ const Food = () => {
 					>
 						<GrPowerReset className='text-white text-xl' />
 					</button>
-
-					{loading && (
-						<div className='flex items-center px-4'>
-							<DotPulse size={40} speed={1.3} color='black' />
-						</div>
-					)}
 				</div>
 
 				{error && <div className='text-xs italic p-1'>Error: {error}</div>}
@@ -117,6 +111,7 @@ const Food = () => {
 									{Math.round(
 										(foodData.hints[0].food.nutrients.ENERC_KCAL * weight) / 100
 									)}
+									g
 								</span>
 							</p>
 							<p className='text-sm bg-lime-200 px-2 py-1 rounded-md'>
@@ -125,6 +120,7 @@ const Food = () => {
 									{Math.round(
 										(foodData.hints[0].food.nutrients.CHOCDF * weight) / 100
 									)}
+									g
 								</span>
 							</p>
 							<p className='text-sm bg-lime-300 px-2 py-1 rounded-md'>
@@ -133,6 +129,7 @@ const Food = () => {
 									{Math.round(
 										(foodData.hints[0].food.nutrients.PROCNT * weight) / 100
 									)}
+									g
 								</span>
 							</p>
 							<p className='text-sm bg-lime-400 px-2 py-1 rounded-md'>
@@ -141,6 +138,7 @@ const Food = () => {
 									{Math.round(
 										(foodData.hints[0].food.nutrients.FAT * weight) / 100
 									)}
+									g
 								</span>
 							</p>
 						</div>

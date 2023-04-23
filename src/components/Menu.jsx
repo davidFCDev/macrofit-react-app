@@ -12,6 +12,7 @@ import {
 
 import { toast } from 'react-hot-toast';
 import { generateValorationGPT } from '../controllers/gptController';
+import { DotPulse } from '@uiball/loaders';
 
 const Menu = () => {
 	const [error, setError] = useState(null);
@@ -147,7 +148,11 @@ const Menu = () => {
 						/>
 					</button>
 
-					{isLoading && <p className='flex items-center px-3'>Pensando...</p>}
+					{isLoading && (
+						<div className='flex items-center px-4'>
+							<DotPulse size={40} speed={1.3} color='black' />
+						</div>
+					)}
 				</div>
 
 				{error && <div className='text-xs italic p-1'>Error: {error}</div>}
@@ -167,17 +172,17 @@ const Menu = () => {
 								<div className='flex flex-col gap-1'>
 									<p className='text-sm bg-lime-100 px-3 py-1 rounded-md'>
 										Total Calories:{' '}
-										<span className='font-bold'>{totalCalories}</span>
+										<span className='font-bold'>{totalCalories}g</span>
 									</p>
-									<p className='text-sm bg-lime-100 px-3 py-1 rounded-md'>
+									<p className='text-sm bg-lime-200 px-3 py-1 rounded-md'>
 										Carbohidrates:{' '}
-										<span className='font-bold'>{totalCarbs}</span>
+										<span className='font-bold'>{totalCarbs}g</span>
 									</p>
-									<p className='text-sm bg-lime-100 px-3 py-1 rounded-md'>
-										Protein: <span className='font-bold'>{totalProtein}</span>
+									<p className='text-sm bg-lime-300 px-3 py-1 rounded-md'>
+										Protein: <span className='font-bold'>{totalProtein}g</span>
 									</p>
-									<p className='text-sm bg-lime-100 px-3 py-1 rounded-md'>
-										Fat: <span className='font-bold'>{totalFat}</span>
+									<p className='text-sm bg-lime-400 px-3 py-1 rounded-md'>
+										Fat: <span className='font-bold'>{totalFat}g</span>
 									</p>
 								</div>
 							</div>
@@ -200,13 +205,16 @@ const Menu = () => {
 					)}
 				</div>
 				{message && (
-					<div className=' italic px-2 py-2 rounded border border-lime-500 flex gap-2 items-center'>
+					<div className=' italic p-3 rounded border border-lime-500 flex gap-4 items-center'>
 						<img
 							src='https://img.freepik.com/vector-premium/futuro-robot-aguacate-dibujos-animados_185029-592.jpg?w=2000'
 							alt='bot'
-							className='w-14 rounded-full'
+							className='w-14 rounded-full transform animate-pulse'
 						/>
-						<p className='text-xs'>{message}</p>
+						<p className='text-xs'>
+							{message}
+							{'...'}
+						</p>
 					</div>
 				)}
 			</div>

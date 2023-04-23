@@ -19,8 +19,15 @@ const Navbar = () => {
 	return (
 		<nav className='w-full'>
 			<div className='nav flex justify-between items-center px-6 border-black'>
-				<Link to='/'>
-					<img src='/logo.png' alt='logo' className='w-32' />
+				<Link to='/' className='py-1'>
+					<h1 className='logo flex items-center'>
+						MACRO<span className='text-lime-500'>AI</span>
+						<img
+							src='https://img.freepik.com/vector-premium/futuro-robot-aguacate-dibujos-animados_185029-592.jpg?w=2000'
+							alt='bot'
+							className='w-7 h-7 rounded-full shadow shadow-neutral-700 ml-2 hover:animate-spin'
+						/>
+					</h1>
 				</Link>
 				{user ? (
 					<div className='flex items-center gap-3'>

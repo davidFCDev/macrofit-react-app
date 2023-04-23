@@ -20,33 +20,12 @@ export async function generateValorationGPT(
 	totalCarbs,
 	totalFat
 ) {
-	const proteinPercent = ((totalProtein * 4) / totalCalories) * 100;
-	const carbPercent = ((totalCarbs * 4) / totalCalories) * 100;
-	const fatPercent = ((totalFat * 9) / totalCalories) * 100;
-
-	let message = '';
-
-	if (proteinPercent < 10) {
-		message += 'Aumenta la ingesta de proteínas o te quedas en los huesos... ';
-	}
-
-	if (carbPercent < 45 || carbPercent > 65) {
-		message +=
-			'Cuidado con los carbohidratos, mantén un equilibrio en tu dieta... ';
-	}
-
-	if (fatPercent > 35) {
-		message += 'Reduce la cantidad de grasas saturadas que consumes... ';
-	}
-
-	if (message === '') {
-		message = '¡Excelente! Tu dieta es equilibrada y saludable... ';
-	}
+	const prompt = `Do it in less than fifty words. Based on your intake of ${totalCalories} calories, ${totalProtein} grams of protein, ${totalCarbs} grams of carbs, and ${totalFat} grams of fat, here are some suggestions for improving your nutrition:`;
 
 	const completion = await openai.createCompletion({
 		model: 'text-davinci-003',
 		max_tokens: 100,
-		prompt: `Total Calories: ${totalCalories}\nTotal Protein: ${totalProtein}\nTotal Carbs: ${totalCarbs}\nTotal Fat: ${totalFat}\n\n${message}`,
+		prompt,
 	});
 
 	return completion.data.choices[0].text;
