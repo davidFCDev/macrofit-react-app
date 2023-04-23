@@ -10,6 +10,9 @@ import {
 	getNutrients,
 } from '../controllers/macroController';
 
+import { toast } from 'react-hot-toast';
+import { generateValorationGPT } from '../controllers/gptController';
+
 const Menu = () => {
 	const [error, setError] = useState(null);
 	const [loading, setLoading] = useState(false);
@@ -20,6 +23,24 @@ const Menu = () => {
 	const [totalProtein, setTotalProtein] = useState(0);
 	const [totalCarbs, setTotalCarbs] = useState(0);
 	const [totalFat, setTotalFat] = useState(0);
+	const [message, setMessage] = useState('');
+	const [isLoading, setIsLoading] = useState(false);
+
+	const handleRate = async () => {
+		if (ingredientList.length > 1) {
+			setIsLoading(true);
+			const newMessage = await generateValorationGPT(
+				totalCalories,
+				totalProtein,
+				totalCarbs,
+				totalFat
+			);
+			setMessage(newMessage);
+		} else {
+			toast.error('Please add at least 2 ingredients to use GPT.');
+		}
+		setIsLoading(false);
+	};
 
 	const handleSearchClick = () => {
 		if (ingredient) {
@@ -56,12 +77,14 @@ const Menu = () => {
 		setIngredient('');
 		setWeight('');
 		setIngredientList([]);
+		setMessage('');
 	};
 
 	const handleDeleteIngredient = index => {
 		const ingredientToRemove = ingredientList[index];
 		const newIngredientList = [...ingredientList];
 		newIngredientList.splice(index, 1);
+		setMessage('');
 		setIngredientList(newIngredientList);
 		setTotalCalories(
 			delNutrients(newIngredientList, ingredientToRemove, 'calories')
@@ -83,10 +106,7 @@ const Menu = () => {
 
 	return (
 		<section className='flex w-full px-10 py-4 justify-between'>
-			<div className='flex flex-col gap-3 w-full'>
-				<div>
-					<h2 className=' text-2xl'>- List a complete menu -</h2>
-				</div>
+			<div className='flex flex-col w-full'>
 				<div className='flex gap-1'>
 					<FoodInputs
 						ingredient={ingredient}
@@ -115,6 +135,19 @@ const Menu = () => {
 					>
 						<GrPowerReset className='text-white text-xl' />
 					</button>
+
+					<button
+						onClick={handleRate}
+						className='border border-neutral-700 bg-red-500 hover:bg-red-400 text-white rounded w-10'
+					>
+						<img
+							src='https://static.vecteezy.com/system/resources/previews/021/608/790/non_2x/chatgpt-logo-chat-gpt-icon-on-black-background-free-vector.jpg'
+							alt='gpt'
+							className='w-full hover:scale-110 transform transition duration-500 ease-in-out'
+						/>
+					</button>
+
+					{isLoading && <p className='flex items-center px-3'>Pensando...</p>}
 				</div>
 
 				{error && <div className='text-xs italic p-1'>Error: {error}</div>}
@@ -124,7 +157,7 @@ const Menu = () => {
 					</div>
 				)}
 
-				<div className='flex items-start py-3'>
+				<div className='flex items-start py-6'>
 					{ingredientList.length > 0 && (
 						<div className='w-full'>
 							<div className='flex flex-col gap-1 w-44'>
@@ -166,6 +199,16 @@ const Menu = () => {
 						</div>
 					)}
 				</div>
+				{message && (
+					<div className=' italic px-2 py-2 rounded border border-lime-500 flex gap-2 items-center'>
+						<img
+							src='https://img.freepik.com/vector-premium/futuro-robot-aguacate-dibujos-animados_185029-592.jpg?w=2000'
+							alt='bot'
+							className='w-14 rounded-full'
+						/>
+						<p className='text-xs'>{message}</p>
+					</div>
+				)}
 			</div>
 		</section>
 	);
