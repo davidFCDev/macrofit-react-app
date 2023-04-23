@@ -17,7 +17,7 @@ const Dashboard = () => {
 	};
 
 	return (
-		<div className='w-full flex flex-col py-6 px-10 gap-4 text-neutral-700'>
+		<div className='w-full flex flex-col py-6 px-10 gap-4 text-neutral-700 bg-neutral-200'>
 			<header className='w-full bg-white rounded-md py-2'>
 				<h1 className='dash-title font-bold text-xl text-center tracking-widest'>
 					DASHBOARD

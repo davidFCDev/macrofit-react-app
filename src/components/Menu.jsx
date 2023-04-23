@@ -158,7 +158,7 @@ const Menu = () => {
 				{error && <div className='text-xs italic p-1'>Error: {error}</div>}
 				{!ingredient && !error && (
 					<div className='text-xs italic p-1'>
-						Please enter an ingredient to search.
+						Please enter your complete menu.
 					</div>
 				)}
 
@@ -211,7 +211,7 @@ const Menu = () => {
 							alt='bot'
 							className='w-14 rounded-full transform animate-pulse'
 						/>
-						<p className='text-xs'>
+						<p className='text-sm'>
 							{message}
 							{'...'}
 						</p>

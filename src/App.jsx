@@ -14,7 +14,7 @@ function App() {
 		<main>
 			<AuthProvider>
 				<Navbar />
-				<div className='bg-neutral-200 flex min-h-screen'>
+				<div className='flex min-h-screen main'>
 					<Routes>
 						<Route path='/' element={<Root />} />
 						<Route
