@@ -35,7 +35,7 @@ export async function generateIngredientGPT(ingredient) {
 	const completion = await openai.createCompletion({
 		model: 'text-davinci-003',
 		max_tokens: 30,
-		prompt: `Tell me in less than fifteen words and always starts with a capital letter, about the nutrition values and benefits of ${ingredient}\n\n ...`,
+		prompt: `Tell me in less than fifteen words, about the nutrition values and benefits of ${ingredient}\n\n ...`,
 	});
 
 	return completion.data.choices[0].text;

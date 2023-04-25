@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { IoMdLogOut } from 'react-icons/io';
 import { RxDashboard } from 'react-icons/rx';
@@ -7,9 +7,12 @@ import { toast } from 'react-hot-toast';
 
 const Navbar = () => {
 	const { user, logout } = useAuth();
+	const navigate = useNavigate();
+
 	const handleLogout = async () => {
 		try {
 			await logout();
+			navigate('/');
 			toast.success('See you soon!');
 		} catch (error) {
 			console.error(error.message);
