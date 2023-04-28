@@ -30,12 +30,19 @@ export function DashboardProvider({ children }) {
 		title: '',
 		description: '',
 		ingredient1: '',
+		weight1: '',
 		ingredient2: '',
+		weight2: '',
 		ingredient3: '',
+		weight3: '',
 		ingredient4: '',
+		weight4: '',
 		ingredient5: '',
+		weight5: '',
 		ingredient6: '',
+		weight6: '',
 		ingredient7: '',
+		weight7: '',
 	});
 	const [recipes, setRecipes] = useState([]);
 	const [mode, setMode] = useState('add');
@@ -46,12 +53,19 @@ export function DashboardProvider({ children }) {
 			title: '',
 			description: '',
 			ingredient1: '',
+			weight1: '',
 			ingredient2: '',
+			weight2: '',
 			ingredient3: '',
+			weight3: '',
 			ingredient4: '',
+			weight4: '',
 			ingredient5: '',
+			weight5: '',
 			ingredient6: '',
+			weight6: '',
 			ingredient7: '',
+			weight7: '',
 		});
 		initializeRecipes();
 	};

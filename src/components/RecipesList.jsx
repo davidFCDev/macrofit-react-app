@@ -81,17 +81,45 @@ const RecipesList = () => {
 					</div>
 					<div className='px-4 py-2 flex flex-col gap-2'>
 						<h3 className='text-sm font-semibold italic'>Ingredients:</h3>
-						<div className='text-'>
-							<p>{recipe.ingredient1}</p>
-							<p>{recipe.ingredient2}</p>
-							<p>{recipe.ingredient3}</p>
-							<p>{recipe.ingredient4}</p>
-							<p>{recipe.ingredient5}</p>
-							<p>{recipe.ingredient6}</p>
-							<p>{recipe.ingredient7}</p>
+						<div className='text-xs'>
+							{recipe.ingredient1 && (
+								<p>
+									{recipe.ingredient1} <span>{recipe.weight1}g</span>
+								</p>
+							)}
+							{recipe.ingredient2 && (
+								<p>
+									{recipe.ingredient2} <span>{recipe.weight2}g</span>
+								</p>
+							)}
+							{recipe.ingredient3 && (
+								<p>
+									{recipe.ingredient3} <span>{recipe.weight3}g</span>
+								</p>
+							)}
+							{recipe.ingredient4 && (
+								<p>
+									{recipe.ingredient4} <span>{recipe.weight4}g</span>
+								</p>
+							)}
+							{recipe.ingredient5 && (
+								<p>
+									{recipe.ingredient5} <span>{recipe.weight5}g</span>
+								</p>
+							)}
+							{recipe.ingredient6 && (
+								<p>
+									{recipe.ingredient6} <span>{recipe.weight6}g</span>
+								</p>
+							)}
+							{recipe.ingredient7 && (
+								<p>
+									{recipe.ingredient7} <span>{recipe.weight7}g</span>
+								</p>
+							)}
 						</div>
 						<h3 className='text-sm font-semibold italic'>Elaboration:</h3>
-						<p>{recipe.description}</p>
+						<p className='text-xs'>{recipe.description}</p>
 					</div>
 				</div>
 			</div>
