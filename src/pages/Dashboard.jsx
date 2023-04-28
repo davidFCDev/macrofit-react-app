@@ -1,17 +1,16 @@
 import { useAuth } from '../context/AuthContext';
 import { MdMenuBook, MdRestaurantMenu } from 'react-icons/md';
 import { GiFruitBowl } from 'react-icons/gi';
-import React, { useState } from 'react';
 import Macros from '../components/Menu';
 import Recipes from '../components/Recipes';
 import Food from '../components/Food';
 import RecipesList from '../components/RecipesList';
 import { RiPlayListAddLine } from 'react-icons/ri';
+import { useDashboard } from '../context/DashboardContext';
 
 const Dashboard = () => {
 	// const { logout, user } = useAuth();
-	const [component, setComponent] = useState(<Food />);
-	const [active, setActive] = useState(0);
+	const { component, setComponent, active, setActive } = useDashboard();
 
 	const renderComponent = (e, i) => {
 		setComponent(e);

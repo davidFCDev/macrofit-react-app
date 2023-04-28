@@ -25,6 +25,13 @@ export const updateRecipe = async recipe => {
 	await setDoc(doc(db, 'recipes', recipe.id), {
 		title: recipe.title,
 		description: recipe.description,
+		ingredient1: recipe.ingredient1,
+		ingredient2: recipe.ingredient2,
+		ingredient3: recipe.ingredient3,
+		ingredient4: recipe.ingredient4,
+		ingredient5: recipe.ingredient5,
+		ingredient6: recipe.ingredient6,
+		ingredient7: recipe.ingredient7,
 	});
 };
 

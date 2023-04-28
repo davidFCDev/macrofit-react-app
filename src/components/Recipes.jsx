@@ -1,66 +1,14 @@
-import {
-	addNewRecipe,
-	deleteRecipe,
-	getRecipes,
-	updateRecipe,
-} from '../controllers/recipeController';
-import { useEffect, useState } from 'react';
-import { ImPencil2 } from 'react-icons/im';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import { BsPen } from 'react-icons/bs';
+import { useDashboard } from '../context/DashboardContext';
 
 const Recipes = () => {
-	const [recipe, setRecipe] = useState({
-		title: '',
-		description: '',
-		ingredient1: '',
-		ingredient2: '',
-		ingredient3: '',
-		ingredient4: '',
-		ingredient5: '',
-		ingredient6: '',
-		ingredient7: '',
-	});
-	const [recipes, setRecipes] = useState([]);
-	const [mode, setMode] = useState('add');
+	const { recipe, setRecipe, createNewRecipe, updateExistingRecipe, mode } =
+		useDashboard();
 
-	const createNewRecipe = async () => {
-		await addNewRecipe(recipe);
-		setRecipe({ title: '', description: '' });
-		initializeRecipes();
-	};
-
-	const initializeRecipes = () => {
-		getRecipes()
-			.then(t => setRecipes([...t]))
-			.catch(e => console.error(e));
-	};
-
-	const editRecipe = id => {
-		setMode('update');
-		const recipeToEdit = recipes.find(t => t.id === id);
-		setRecipe({ ...recipeToEdit });
-	};
-
-	const updateExistingRecipe = async () => {
-		await updateRecipe(recipe);
-		setRecipe({ title: '', description: '' });
-		initializeRecipes();
-		setMode('add');
-	};
-
-	const removeRecipe = async id => {
-		await deleteRecipe(id);
-		initializeRecipes();
-	};
-
-	useEffect(() => {
-		initializeRecipes();
-	}, []);
 	return (
 		<div className='flex flex-col gap-5 w-full px-10 py-4 text-neutral-600'>
 			<h2 className='font-semibold text-xl italic flex gap-2 items-center'>
-				New recipe <BsPen className='w-4' />
+				{mode === 'add' ? 'New' : 'Update'} recipe <BsPen className='w-4' />
 			</h2>
 			<div className='flex flex-col gap-2 w-full'>
 				<input
@@ -173,45 +121,6 @@ const Recipes = () => {
 						}
 					/>
 				</div>
-			</div>
-			<div className='grid'>
-				{recipes.map(r => (
-					<div
-						key={r.id}
-						className='flex flex-col gap-2 bg-neutral-100 rounded-md p-2'
-					>
-						<div className=''>
-							<div className='flex flex-col gap-2 text-xs'>
-								<h3 className='font-semibold'>{r.title}</h3>
-								<h4>Ingredients:</h4>
-								<div>
-									<p>{r.ingredient1}</p>
-									<p>{r.ingredient2}</p>
-									<p>{r.ingredient3}</p>
-									<p>{r.ingredient4}</p>
-									<p>{r.ingredient5}</p>
-									<p>{r.ingredient6}</p>
-									<p>{r.ingredient7}</p>
-									<p>{r.description}</p>
-								</div>
-							</div>
-							<div className='flex gap-2'>
-								<button
-									className='user-btn text-white font-semibold py-1 rounded-md'
-									onClick={() => editRecipe(r.id)}
-								>
-									<ImPencil2 />
-								</button>
-								<button
-									className='user-btn text-white font-semibold py-1 rounded-md'
-									onClick={() => removeRecipe(r.id)}
-								>
-									<RiDeleteBin6Line />
-								</button>
-							</div>
-						</div>
-					</div>
-				))}
 			</div>
 		</div>
 	);
