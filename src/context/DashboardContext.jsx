@@ -5,7 +5,8 @@ import {
 	getRecipes,
 	updateRecipe,
 } from '../controllers/recipeController';
-import Food from '../components/Food';
+import { toast } from 'react-hot-toast';
+import SearchIngredientPage from '../pages/SearchIngredientPage';
 
 const dashboardContext = createContext();
 
@@ -18,55 +19,43 @@ export const useDashboard = () => {
 };
 
 export function DashboardProvider({ children }) {
-	const [component, setComponent] = useState(<Food />);
+	const [component, setComponent] = useState(<SearchIngredientPage />);
+	const [toggleMacros, setToggleMacros] = useState(false);
+	const [error, setError] = useState(null);
+	const [loading, setLoading] = useState(false);
 	const [active, setActive] = useState(0);
+	const [selectedRecipe, setSelectedRecipe] = useState('');
+	const [recipes, setRecipes] = useState([]);
+	const [mode, setMode] = useState('add');
+	const initialState = {
+		title: '',
+		description: '',
+		ingredient1: '',
+		weight1: 0,
+		ingredient2: '',
+		weight2: 0,
+		ingredient3: '',
+		weight3: 0,
+		ingredient4: '',
+		weight4: 0,
+		ingredient5: '',
+		weight5: 0,
+		ingredient6: '',
+		weight6: 0,
+		ingredient7: '',
+		weight7: 0,
+	};
+	const [recipe, setRecipe] = useState(initialState);
 
 	const renderComponent = (e, i) => {
 		setComponent(e);
 		setActive(i);
 	};
 
-	const [recipe, setRecipe] = useState({
-		title: '',
-		description: '',
-		ingredient1: '',
-		weight1: '',
-		ingredient2: '',
-		weight2: '',
-		ingredient3: '',
-		weight3: '',
-		ingredient4: '',
-		weight4: '',
-		ingredient5: '',
-		weight5: '',
-		ingredient6: '',
-		weight6: '',
-		ingredient7: '',
-		weight7: '',
-	});
-	const [recipes, setRecipes] = useState([]);
-	const [mode, setMode] = useState('add');
-
 	const createNewRecipe = async () => {
 		await addNewRecipe(recipe);
-		setRecipe({
-			title: '',
-			description: '',
-			ingredient1: '',
-			weight1: '',
-			ingredient2: '',
-			weight2: '',
-			ingredient3: '',
-			weight3: '',
-			ingredient4: '',
-			weight4: '',
-			ingredient5: '',
-			weight5: '',
-			ingredient6: '',
-			weight6: '',
-			ingredient7: '',
-			weight7: '',
-		});
+		setRecipe(initialState);
+		toast.success('Recipe added successfully!');
 		initializeRecipes();
 	};
 
@@ -84,13 +73,15 @@ export function DashboardProvider({ children }) {
 
 	const updateExistingRecipe = async () => {
 		await updateRecipe(recipe);
-		setRecipe({ title: '', description: '' });
+		toast.success('Recipe updated successfully!');
 		initializeRecipes();
 		setMode('add');
+		setRecipe(initialState);
 	};
 
 	const removeRecipe = async id => {
 		await deleteRecipe(id);
+		toast.success('Recipe deleted successfully!');
 		initializeRecipes();
 	};
 
@@ -107,16 +98,24 @@ export function DashboardProvider({ children }) {
 				initializeRecipes,
 				removeRecipe,
 				renderComponent,
-				recipe,
-				recipes,
-				mode,
-				component,
+				setSelectedRecipe,
 				setComponent,
-				active,
 				setActive,
 				setRecipe,
 				setMode,
 				setRecipes,
+				setError,
+				setLoading,
+				setToggleMacros,
+				toggleMacros,
+				error,
+				loading,
+				recipe,
+				recipes,
+				mode,
+				component,
+				selectedRecipe,
+				active,
 			}}
 		>
 			{children}

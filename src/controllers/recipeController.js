@@ -32,6 +32,13 @@ export const updateRecipe = async recipe => {
 		ingredient5: recipe.ingredient5,
 		ingredient6: recipe.ingredient6,
 		ingredient7: recipe.ingredient7,
+		weight1: recipe.weight1,
+		weight2: recipe.weight2,
+		weight3: recipe.weight3,
+		weight4: recipe.weight4,
+		weight5: recipe.weight5,
+		weight6: recipe.weight6,
+		weight7: recipe.weight7,
 	});
 };
 

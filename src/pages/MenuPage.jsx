@@ -2,34 +2,32 @@ import React, { useState } from 'react';
 import { RxCross2 } from 'react-icons/rx';
 import { GrPowerReset } from 'react-icons/gr';
 import { VscAdd } from 'react-icons/vsc';
-import FoodInputs from './IngredientInput';
+import FoodInputs from '../components/IngredientInput';
 import {
 	addNutrients,
 	delNutrients,
 	getIngredient,
 	getNutrients,
 } from '../controllers/macroController';
-
 import { toast } from 'react-hot-toast';
 import { generateValorationGPT } from '../controllers/gptController';
 import { DotPulse } from '@uiball/loaders';
+import { useDashboard } from '../context/DashboardContext';
 
-const Menu = () => {
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(false);
+const MenuPage = () => {
 	const [ingredient, setIngredient] = useState('');
 	const [weight, setWeight] = useState('');
+	const [message, setMessage] = useState('');
 	const [ingredientList, setIngredientList] = useState([]);
 	const [totalCalories, setTotalCalories] = useState(0);
 	const [totalProtein, setTotalProtein] = useState(0);
 	const [totalCarbs, setTotalCarbs] = useState(0);
 	const [totalFat, setTotalFat] = useState(0);
-	const [message, setMessage] = useState('');
-	const [isLoading, setIsLoading] = useState(false);
+	const { error, setError, loading, setLoading} = useDashboard();
 
 	const handleRate = async () => {
 		if (ingredientList.length > 1) {
-			setIsLoading(true);
+			setLoading(true);
 			const newMessage = await generateValorationGPT(
 				totalCalories,
 				totalProtein,
@@ -40,7 +38,7 @@ const Menu = () => {
 		} else {
 			toast.error('Please add at least 2 ingredients to use GPT.');
 		}
-		setIsLoading(false);
+		setLoading(false);
 	};
 
 	const handleSearchClick = () => {
@@ -148,7 +146,7 @@ const Menu = () => {
 						/>
 					</button>
 
-					{isLoading && (
+					{loading && (
 						<div className='flex items-center px-4'>
 							<DotPulse size={40} speed={1.3} color='black' />
 						</div>
@@ -222,4 +220,4 @@ const Menu = () => {
 	);
 };
 
-export default Menu;
+export default MenuPage;

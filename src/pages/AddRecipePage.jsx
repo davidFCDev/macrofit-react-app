@@ -1,7 +1,7 @@
 import { BsPen } from 'react-icons/bs';
 import { useDashboard } from '../context/DashboardContext';
 
-const Recipes = () => {
+const AddRecipePage = () => {
 	const { recipe, setRecipe, createNewRecipe, updateExistingRecipe, mode } =
 		useDashboard();
 
@@ -192,7 +192,7 @@ const Recipes = () => {
 						</div>
 
 						<button
-							className='user-btn text-white font-semibold py-1'
+							className='user-btn text-white font-semibold py-1 rounded'
 							onClick={() =>
 								mode === 'add' ? createNewRecipe() : updateExistingRecipe()
 							}
@@ -218,4 +218,4 @@ const Recipes = () => {
 	);
 };
 
-export default Recipes;
+export default AddRecipePage;

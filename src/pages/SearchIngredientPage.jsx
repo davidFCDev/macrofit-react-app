@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
-import FoodInputs from './IngredientInput';
+import IngredientInput from '../components/IngredientInput';
 import { getIngredient } from '../controllers/macroController';
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { GrPowerReset } from 'react-icons/gr';
 import { generateIngredientGPT } from '../controllers/gptController';
-import { DotPulse } from '@uiball/loaders';
+import { useDashboard } from '../context/DashboardContext';
 
-const Food = () => {
+const SearchIngredientPage = () => {
 	const [foodData, setFoodData] = useState(null);
-	const [error, setError] = useState(null);
-	const [loading, setLoading] = useState(false);
 	const [ingredient, setIngredient] = useState('');
 	const [weight, setWeight] = useState('');
 	const [message, setMessage] = useState('');
+	const { error, setError, loading, setLoading } = useDashboard();
 
 	const handleSearchClick = async () => {
 		setLoading(true);
@@ -60,7 +59,7 @@ const Food = () => {
 		<div className='w-full px-10 py-4 text-neutral-600 '>
 			<div className='flex flex-col'>
 				<div className='flex gap-1'>
-					<FoodInputs
+					<IngredientInput
 						ingredient={ingredient}
 						weight={weight}
 						loading={loading}
@@ -165,4 +164,4 @@ const Food = () => {
 	);
 };
 
-export default Food;
+export default SearchIngredientPage;

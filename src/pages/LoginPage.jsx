@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Alert } from './Alert';
+import { Alert } from '../components/Alert';
 import { toast } from 'react-hot-toast';
 
-const login = () => {
+const LoginPage = () => {
 	const [user, setUser] = useState({
 		email: '',
 		password: '',
@@ -126,4 +126,4 @@ const login = () => {
 	);
 };
 
-export default login;
+export default LoginPage;

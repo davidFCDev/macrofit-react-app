@@ -1,25 +1,27 @@
 import { useAuth } from '../context/AuthContext';
 import { MdMenuBook, MdRestaurantMenu } from 'react-icons/md';
 import { GiFruitBowl } from 'react-icons/gi';
-import Macros from '../components/Menu';
-import Recipes from '../components/Recipes';
-import Food from '../components/Food';
-import RecipesList from '../components/RecipesList';
+import Macros from './MenuPage';
+import SearchIngredientPage from './SearchIngredientPage';
+
+import AddRecipePage from './AddRecipePage';
+import RecipeListPage from './RecipeListPage';
 import { RiPlayListAddLine } from 'react-icons/ri';
 import { useDashboard } from '../context/DashboardContext';
 
-const Dashboard = () => {
+const DashboardPage = () => {
 	// const { logout, user } = useAuth();
-	const { component, setComponent, active, setActive } = useDashboard();
+	const { component, setComponent, active, setActive, setSelectedRecipe } = useDashboard();
 
 	const renderComponent = (e, i) => {
 		setComponent(e);
 		setActive(i);
+		setSelectedRecipe('');
 	};
 
 	return (
 		<div className='w-full flex flex-col py-3 px-10 gap-3 text-neutral-700 bg-neutral-200'>
-			<header className='w-full bg-white rounded-md py-3'>
+			<header className='w-full bg-white rounded-md py-2'>
 				<h1 className='dash-title font-bold text-xl text-center tracking-widest'>
 					DASHBOARD
 				</h1>
@@ -31,7 +33,7 @@ const Dashboard = () => {
 						className={`flex justify-between px-4 py-5 bg-white shadow-sm w-96 rounded-md border-2 hover:bg-neutral-100 hover:cursor-pointer ${
 							active === 0 ? 'border-lime-600' : ''
 						}`}
-						onClick={() => renderComponent(<Food />, 0)}
+						onClick={() => renderComponent(<SearchIngredientPage />, 0)}
 					>
 						<div className=' flex flex-col gap-2'>
 							<h2 className='text-sm font-semibold uppercase'>Ingredient</h2>
@@ -67,7 +69,7 @@ const Dashboard = () => {
 						className={`flex justify-between px-4 py-5 bg-white shadow-sm w-96 rounded-md border-2 hover:bg-neutral-100 hover:cursor-pointer ${
 							active === 2 ? 'border-lime-600' : ''
 						}`}
-						onClick={() => renderComponent(<Recipes />, 2)}
+						onClick={() => renderComponent(<AddRecipePage />, 2)}
 					>
 						<div className=' flex flex-col gap-2'>
 							<h2 className='text-sm font-semibold uppercase'>Recipe</h2>
@@ -83,7 +85,7 @@ const Dashboard = () => {
 						className={`flex justify-between px-4 py-5 bg-white shadow-sm w-96 rounded-md border-2 hover:bg-neutral-100 hover:cursor-pointer ${
 							active === 3 ? 'border-lime-600' : ''
 						}`}
-						onClick={() => renderComponent(<RecipesList />, 3)}
+						onClick={() => renderComponent(<RecipeListPage />, 3)}
 					>
 						<div className=' flex flex-col gap-2'>
 							<h2 className='text-sm font-semibold uppercase'>Recipe list</h2>
@@ -106,4 +108,4 @@ const Dashboard = () => {
 	);
 };
 
-export default Dashboard;
+export default DashboardPage;

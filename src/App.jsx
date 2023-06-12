@@ -1,14 +1,14 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import Dashboard from './pages/Dashboard';
-import Login from './pages/Login';
-import Register from './pages/Register';
-import ProtectedRoute from './pages/ProtectedRoute';
-import Root from './pages/Root';
-import Navbar from './components/Navbar';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context/AuthContext';
 import { DashboardProvider } from './context/DashboardContext';
+import ProtectedRoute from './pages/ProtectedRoute';
+import Root from './pages/Root';
+import Navbar from './components/Navbar';
+import DashboardPage from './pages/DashboardPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
 	return (
@@ -23,12 +23,12 @@ function App() {
 								path='/dashboard'
 								element={
 									<ProtectedRoute>
-										<Dashboard />
+										<DashboardPage />
 									</ProtectedRoute>
 								}
 							/>
-							<Route path='/login' element={<Login />} />
-							<Route path='/register' element={<Register />} />
+							<Route path='/login' element={<LoginPage />} />
+							<Route path='/register' element={<RegisterPage />} />
 						</Routes>
 					</div>
 				</DashboardProvider>
